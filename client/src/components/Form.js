@@ -11,8 +11,8 @@ export const Form = () => {
         email: yup.string().email().required("required"),
         tel: yup.string()
         .matches(telRegExp, 'Phone number is not valid')
-        .min(8, "to short")
-        .max(8, "to long")
+        // .min(12, "to short")
+        // .max(12, "to long")
         .required("required"),
         password: yup.string().min(6).max(20).required(),
         confirmPassword: yup.string()
@@ -51,7 +51,7 @@ export const Form = () => {
         <input 
             className="input"
             type = "tel" 
-            placeholder = "+4512345678" 
+            placeholder = "(0045)12345678" 
             required {...register("tel")}/>
         <p className="validationMessage">{errors.tel?.message}</p>
 
