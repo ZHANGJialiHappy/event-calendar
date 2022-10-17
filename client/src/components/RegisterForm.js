@@ -3,7 +3,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-export const Form = () => {
+export const RegisterForm = () => {
     const telRegExp = /(?:(?:00|\+)?45)?\d{8}/
 
     const schema = yup.object().shape({
@@ -69,7 +69,10 @@ export const Form = () => {
         <p className="validationMessage">{errors.confirmPassword?.message}</p>
         </div>
 
-        <button>Submit</button>
+        <div className="buttonContainer">
+        <button>Login</button>
+        </div>
+        
     </form>
     </div>
   )
