@@ -69,10 +69,12 @@ export const RegisterForm = () => {
         <p className="validationMessage">{errors.confirmPassword?.message}</p>
         </div>
 
+        <p><a href="http://localhost:3000/login">Do you have an account?</a></p>
+
         <div className="buttonContainer">
-        <button>Login</button>
+        <button>Register</button>
         </div>
-        
+
     </form>
     </div>
   )

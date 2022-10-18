@@ -35,7 +35,7 @@ export const LoginForm = () => {
         <p className="validationMessage">{errors.password?.message}</p>
         </div>
 
-        <p>Do you have no account?</p>
+        <p><a href="http://localhost:3000/register">Do you have no account?</a></p>
 
         <div className="buttonContainer">
         <button>Login</button>
