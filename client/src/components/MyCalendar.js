@@ -1,24 +1,46 @@
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import '../../node_modules/react-big-calendar/lib/css/react-big-calendar.css';
+import { useState } from 'react';
 
 export const MyCalendar = props => {
-  const localizer = momentLocalizer(moment)
   const myEvents = [
     {
       "id": 0,
       "title": "All Day Event very long title",
-      "allDay": true,
       "start": "2022-10-18T22:00:00.000Z",
       "end": "2022-10-19T22:00:00.000Z"
     }
   ];
+  const [calendarEvent, setCalendarEvent] = useState(myEvents);
+
+  const localizer = momentLocalizer(moment)
+
+  const handleSelectSlot = (data) => {
+    console.log("slot", data);
+    
+    const event = {
+      "id": Math.random(1000),
+      "title": "My test event",
+      "start": data.start,
+      "end": data.end
+    };
+    setCalendarEvent([...calendarEvent, event]);
+  }
+
+  const handleSelectEvent = (data) => {
+    console.log("event", data);
+    setCalendarEvent (calendarEvent.filter((event)=>event.id!==data.id))
+  }
 
   return (
     <div>
       <Calendar
+        selectable={true}
+        onSelectSlot={handleSelectSlot}
+        onSelectEvent={handleSelectEvent}
         localizer={localizer}
-        events={myEvents}
+        events={calendarEvent}
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500 }}
