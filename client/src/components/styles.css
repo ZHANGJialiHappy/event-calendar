@@ -3,22 +3,22 @@
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   } */
-  
-  .formContainer {
+
+.formContainer {
     display: flex;
     justify-content: center;
     flex-direction: row;
-  }
+}
 
-  .form {
+.form {
     border: 1px #eee solid;
     border-radius: 5px;
     box-shadow: 0px 1px 4px rgb(0 0 0 / 30%);
     padding: 32px;
     color: cadetblue;
-  }
+}
 
-  h2 {
+h2 {
     display: block;
     font-size: 1.5em;
     margin-block-start: 0.83em;
@@ -27,16 +27,16 @@
     margin-inline-end: 0px;
     font-weight: bold;
 }
-  
-  .label {
+
+.label {
     color: cadetblue;
     margin-bottom: 0.25em;
     font-size: 1em;
-  }
-  
-  .input {
+}
+
+.input {
     border: 1px solid #ccc;
-    box-sizing:border-box;
+    box-sizing: border-box;
     color: #888;
     border-radius: 0.25em;
     padding: 0.2em 0.4em;
@@ -46,37 +46,37 @@
     font-size: 1em;
     font-weight: 200;
     font-family: inherit;
-  }
-  
-  .input:required {
+}
+
+.input:required {
     border-left: 4px solid rgb(15, 11, 11);
-  }
-  
-  .input:focus {
+}
+
+.input:focus {
     outline: 2px solid lightseagreen;
-  }
-  
-  .validationMessage {
+}
+
+.validationMessage {
     font-size: 0.8em;
     color: red;
     margin-top: 0.5em;
-  }
-  
-  .innerContent {
+}
+
+.innerContent {
     position: relative;
     display: flex;
     align-items: center;
-  }
-  
-  .rhsComponent {
-    height: 100%;
-  }
-  
-  a {
-    color: cadetblue;
-  }
+}
 
-  button {
+.rhsComponent {
+    height: 100%;
+}
+
+a {
+    color: cadetblue;
+}
+
+button {
     border: none;
     background-color: lightseagreen;
     border-radius: 5px;
@@ -85,18 +85,31 @@
     font-size: 1em;
     margin: 0 auto;
     text-align: center;
-  }
+}
 
-  .buttonContainer {
+.buttonContainer {
     display: flex;
     justify-content: center;
     flex-direction: row;
-  }
-  
-  button:focus {
-    outline: 2px solid rgb(19, 102, 98);
-  }
+}
 
-  input, label {
-    display:block;
+button:focus {
+    outline: 2px solid rgb(19, 102, 98);
+}
+
+input,
+label {
+    display: block;
+}
+
+.dialog {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    background-color: #fff;
+}
+.hide {
+    display: none;
 }
