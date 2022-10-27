@@ -16,24 +16,30 @@ export const MyCalendar = props => {
   const [calendarEvent, setCalendarEvent] = useState(myEvents);
   const localizer = momentLocalizer(moment)
   const [isVisible, setIsVisible] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState(null);
 
 
   const handleSelectSlot = (data) => {
-    console.log("slot", data);
-    setIsVisible(!isVisible)
-    
-    // const event = {
-    //   "id": Math.random(1000),
-    //   "title": "My test event",
-    //   "start": data.start,
-    //   "end": data.end
-    // };
-    // setCalendarEvent([...calendarEvent, event]);
+    setIsVisible(true);
+    const event = {
+      id: Math.floor(Math.random() * 10000),
+      title: "12",
+      start: data.start,
+      end: data.end
+    }
+    setCurrentEvent(event);
   }
 
   const handleSelectEvent = (data) => {
     console.log("event", data);
-    setCalendarEvent (calendarEvent.filter((event)=>event.id!==data.id))
+    setIsVisible(true);
+  }
+
+  const handleSubmit = (event) => {
+    console.log(event);
+    const others = calendarEvent.filter((item)=>item.id!==event.id);
+    const newEvents = [...others,event];
+    setCalendarEvent(newEvents);
   }
 
   return (
@@ -49,7 +55,7 @@ export const MyCalendar = props => {
         endAccessor="end"
         style={{ height: 500 }}
       />
-      <Dialog visiable={isVisible} />
+      <Dialog visiable={isVisible} event={currentEvent} onSubmit={handleSubmit} />
      
     </div>
   )

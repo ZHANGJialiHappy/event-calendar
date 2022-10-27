@@ -1,67 +1,44 @@
 import './styles.css';
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useState } from "react";
 
 
-export const Dialog = ({ visiable }) => {
-    const schema = yup.object().shape({
-        title: yup.string().required(),
-    })
+export const Dialog = ({ visiable, event, onSubmit }) => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-    });
+    console.log(event);
 
-    const onSubmit = (data) => {
-        console.log(data);
-    };
+    // {
+    //     "id": 0,
+    //     "title": "All Day Event very long title",
+    //     "start": "2022-10-18T22:00:00.000Z",
+    //     "end": "2022-10-19T22:00:00.000Z"
+    //   }
 
-    const [newTask, setNewTask] = useState("")
-    const [todoList, setTodolist] = useState([])
+    const [currentEvent, setCurrentEvent] = useState(event);
 
-    const handelChange = (event) => {
-        setNewTask(event.target.value)
+
+    const handelTitelChange = (e) => {
+        setCurrentEvent({ ...currentEvent, title: e.target.value });
     }
 
-    const addNewTask = () => {
-        const task = {
-            id: Math.floor(Math.random() * 10000),
-            taskName: newTask,
-        }
-        setTodolist([...todoList, task])
-        setNewTask("")
+    const handleSubmit = () => {
+        onSubmit(currentEvent);
     }
 
-    const deleteTask = (id) => {
-        setTodolist(todoList.filter((task) => task.id !== id))
-    }
 
     return (
         <div className={visiable ? "dialog" : "hide"}>
-            <form className="form" onSubmit={handleSubmit(onSubmit)}>
+            <form className="form">
                 <div>
                     <label className="label" >Event</label>
                     <input
                         className="input"
                         type="text"
                         placeholder="Add title"
-                        required {...register("email")}
-                        onChange={handelChange} />
-
-                    <p className="validationMessage">{errors.email?.message}</p>
+                        value={currentEvent?.title}
+                        onChange={handelTitelChange} />
                 </div>
                 <div className="buttonContainer">
-                    <button onClick={addNewTask}>Submit</button>
-                    {todoList.map((task) => {
-                        return (
-                            <div key={task.id}>
-                                {task.taskName}
-                                <button onClick={() => deleteTask(task.id)}> x </button>
-                            </div>
-                        )
-                    })}
+                    <button onClick={handleSubmit}>Submit</button>
                 </div>
             </form>
         </div>
