@@ -1,29 +1,18 @@
 import './styles.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-
-export const Dialog = ({ visiable, event, onSubmit }) => {
-
-    console.log(event);
-
-    // {
-    //     "id": 0,
-    //     "title": "All Day Event very long title",
-    //     "start": "2022-10-18T22:00:00.000Z",
-    //     "end": "2022-10-19T22:00:00.000Z"
-    //   }
-
+export const Dialog = ({ visiable, event, onSubmit, closeDialog }) => {
     const [currentEvent, setCurrentEvent] = useState(event);
-
+    useEffect(()=>setCurrentEvent(event),[event]);
 
     const handelTitelChange = (e) => {
         setCurrentEvent({ ...currentEvent, title: e.target.value });
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         onSubmit(currentEvent);
     }
-
 
     return (
         <div className={visiable ? "dialog" : "hide"}>
@@ -39,6 +28,8 @@ export const Dialog = ({ visiable, event, onSubmit }) => {
                 </div>
                 <div className="buttonContainer">
                     <button onClick={handleSubmit}>Submit</button>
+                    <button onClick={(e)=>closeDialog(e)}>Close</button>
+
                 </div>
             </form>
         </div>

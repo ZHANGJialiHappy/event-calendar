@@ -5,15 +5,8 @@ import { useState } from 'react';
 import { Dialog } from './Dialog';
 
 export const MyCalendar = props => {
-  const myEvents = [
-    {
-      "id": 0,
-      "title": "All Day Event very long title",
-      "start": "2022-10-18T22:00:00.000Z",
-      "end": "2022-10-19T22:00:00.000Z"
-    }
-  ];
-  const [calendarEvent, setCalendarEvent] = useState(myEvents);
+  
+  const [calendarEvent, setCalendarEvent] = useState([]);
   const localizer = momentLocalizer(moment)
   const [isVisible, setIsVisible] = useState(false);
   const [currentEvent, setCurrentEvent] = useState(null);
@@ -23,31 +16,35 @@ export const MyCalendar = props => {
     setIsVisible(true);
     const event = {
       id: Math.floor(Math.random() * 10000),
-      title: "12",
+      title: "",
       start: data.start,
       end: data.end
     }
     setCurrentEvent(event);
   }
 
-  const handleSelectEvent = (data) => {
-    console.log("event", data);
+  const handleSelectEvent = (event) => {
+    setCurrentEvent(event);
     setIsVisible(true);
   }
 
-  const handleSubmit = (event) => {
-    console.log(event);
+  const onSubmit = (event) => {
     const others = calendarEvent.filter((item)=>item.id!==event.id);
     const newEvents = [...others,event];
     setCalendarEvent(newEvents);
+    closeDialog();
   }
+
+  const closeDialog = (e) => {
+    e?.preventDefault();
+    setIsVisible(false);
+}
 
   return (
     <div>
       <Calendar
         selectable={true}
-        onSelectSlot={handleSelectSlot}
-      
+        onSelectSlot={handleSelectSlot}     
         onSelectEvent={handleSelectEvent}
         localizer={localizer}
         events={calendarEvent}
@@ -55,7 +52,7 @@ export const MyCalendar = props => {
         endAccessor="end"
         style={{ height: 500 }}
       />
-      <Dialog visiable={isVisible} event={currentEvent} onSubmit={handleSubmit} />
+      <Dialog visiable={isVisible} event={currentEvent} onSubmit={onSubmit} closeDialog={closeDialog}/>
      
     </div>
   )
